@@ -11,10 +11,17 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
-      - name: Instala Node.js
+      - name: Clonar repositório
+        uses: actions/checkout@v3
+
+      - name: Instalar Node.js
         uses: actions/setup-node@v3
         with:
           node-version: "20"
-      - run: npm install
-      - run: npm test -- --watchAll=false
+          cache: "npm"
+
+      - name: Instalar dependências
+        run: npm install
+
+      - name: Rodar testes com Vite
+        run: npm run test
