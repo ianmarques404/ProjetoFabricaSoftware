@@ -23,5 +23,5 @@ jobs:
       - name: Instalar dependências
         run: npm install
 
-      - name: Rodar testes com Vite
+      - name: Rodar testes com Vitest
         run: npm run test
