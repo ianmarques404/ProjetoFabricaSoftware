@@ -6,6 +6,7 @@ import { X } from 'lucide-react'
 interface NoteCardProps {
     note: {
         id: string,
+        title: string,
         date: Date;
         content: string;
     }
@@ -16,13 +17,9 @@ export function NoteCard({ note, onNoteDeleted }: NoteCardProps) {
     return (
         <Dialog.Root>
             <Dialog.Trigger className='text-left rounded-md flex flex-col bg-slate-800 p-5 gap-3 overflow-hidden relative outline-none hover:ring-2 hover:ring-slate-600 focus-visible:ring-2 focus-visible:ring-lime-400'>
-                <span className='text-sm font-medium text-slate-300 first-letter:uppercase'>
-                    {formatDistanceToNow(note.date, { locale: ptBR, addSuffix: true})}
-                </span>
-
-                <p className='text-sm leading-6 text-slate-400'>
-                    {note.content}
-                </p>
+                <p className='text-lg leading-6 text-slate-200'>{note.title}</p>
+                <span className='text-sm font-medium text-slate-300 first-letter:uppercase'> {formatDistanceToNow(note.date, { locale: ptBR, addSuffix: true })} </span>
+                <p className='text-sm leading-6 text-slate-400'>{note.content}</p>
                 <div className='absolute bottom-0 left-0 right-0 h-1/2 bg-gradient-to-t from-black/60 to-black/0 pointer-events-none' />
             </Dialog.Trigger>
 
@@ -33,13 +30,9 @@ export function NoteCard({ note, onNoteDeleted }: NoteCardProps) {
                         <X className='size-5'/*seta tanto o h quanto o w*/ />
                     </Dialog.Close>
                     <div className='flex flex-1 flex-col gap-6 p-5 '>
-                        <span className='text-sm font-medium text-slate-300 first-letter:uppercase'>
-                            {formatDistanceToNow(note.date, { locale: ptBR, addSuffix: true })}
-                        </span>
-
-                        <p className='text-sm leading-6 text-slate-400'>
-                            {note.content}
-                        </p>
+                        <p className='text-lg leading-6 text-slate-200'> {note.title} </p>
+                        <span className='text-sm font-medium text-slate-300 first-letter:uppercase'> {formatDistanceToNow(note.date, { locale: ptBR, addSuffix: true })} </span>
+                        <p className='text-sm leading-6 text-slate-400'> {note.content} </p>
                     </div>
 
                     <button
@@ -47,7 +40,7 @@ export function NoteCard({ note, onNoteDeleted }: NoteCardProps) {
                         className='w-full bg-slate-800 py-4 text-center text-sm text-slate-300 outline-none font-medium group'
                         onClick={() => onNoteDeleted(note.id)}
                     >{/** o 'group' transformou esse button num grupo, no caso o pai, que pode setar coisas para os filhos */}
-                        Deseja <span className='text-red-400 group-hover:underline'>apagar essa nota</span>?{/** o span é o filho, esse group-hover é uma ação que acontece com o span por ser filho do button */}
+                        Deseja <span className='text-red-400 group-hover:underline'>apagar essa tarefa</span>?{/** o span é o filho, esse group-hover é uma ação que acontece com o span por ser filho do button */}
                     </button>
                 </Dialog.Content>
             </Dialog.Portal>

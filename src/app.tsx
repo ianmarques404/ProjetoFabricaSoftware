@@ -1,11 +1,11 @@
 import { ChangeEvent, useState } from 'react';
-import logo from './assets/logo-nlw-expert.svg';
 import { NoteCard } from './components/Note-card';
 import { NewNoteCard } from './components/new-note-card';
 import { toast } from 'sonner';
 
 interface Note {
   id: string,
+  title: string,
   date: Date,
   content: string
 }
@@ -20,13 +20,18 @@ export function App() {
     if (notesOnStorage) {
       return JSON.parse(notesOnStorage)
     }
-
     return []
   })
 
-  function onNoteCreated(content: string) {
+  function onNoteCreated(title: string, content: string) {
+    if (title.trim() === '' || content.trim() === ''){
+      toast.error('Título e conteúdo são obrigatórios');
+      return
+    }
+
     const newNote = {
       id: crypto.randomUUID(),
+      title,
       date: new Date(),
       content,
     }
@@ -34,7 +39,6 @@ export function App() {
     const notesArray = [newNote, ...notes]
 
     setNotes(notesArray)
-
     //JSON = JavaScrip Object Notation
     localStorage.setItem('notes', JSON.stringify(notesArray))
   }
@@ -43,7 +47,7 @@ export function App() {
     const notesArray = notes.filter(note => {
       return note.id != id
     })
-    toast.info('Nota apagada.')
+    toast.info('Tarefa apagada.')
 
     setNotes(notesArray)
 
@@ -63,11 +67,10 @@ export function App() {
 
   return (
     <div className='mx-auto max-w-6xl my-12 space-y-6 px-5' >
-      <img src={logo} alt='NLW Expert' />
       <form className='w-full ' >
         <input
           type='text'
-          placeholder='Busque em suas notas...'
+          placeholder='Busque em suas terefas aqui...'
           className='w-full bg-transparent text-3xl font-semibold tracking-tight outline-none placeholder:text-slate-500'
           onChange={handleSearch}
         />
