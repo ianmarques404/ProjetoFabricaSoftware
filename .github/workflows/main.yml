@@ -1,0 +1,41 @@
+name: CI - Testes
+
+on:
+  push:
+    branches:
+      - main  # Ou a branch que você estiver utilizando para desenvolvimento
+  pull_request:
+    branches:
+      - main  # Ou a branch que você estiver utilizando para desenvolvimento
+
+jobs:
+  test:
+    runs-on: ubuntu-latest  # A máquina onde o workflow vai rodar
+
+    steps:
+    # Step 1: Check out o código
+    - name: Check out the code
+      uses: actions/checkout@v2
+
+    # Step 2: Configurar Node.js
+    - name: Set up Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '16'  # Altere para a versão do Node.js que você está utilizando
+
+    # Step 3: Instalar as dependências
+    - name: Install dependencies
+      run: npm install
+
+    # Step 4: Rodar os testes
+    - name: Run tests
+      run: npm test -- --coverage  # Caso queira gerar cobertura dos testes, se não, apenas 'npm test'
+      env:
+        CI: true  # Força o Jest a rodar no modo de CI
+
+    # Step 5: Publicar resultados de cobertura (opcional)
+    - name: Upload coverage results (if you use coverage tools)
+      if: success() && steps.test.outputs.coverage != ''
+      uses: codecov/codecov-action@v2
+      with:
+        file: './coverage/lcov-report/index.html'  # Altere se necessário, conforme o caminho da cobertura
