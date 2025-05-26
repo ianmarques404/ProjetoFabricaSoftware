@@ -1,5 +1,5 @@
 import { ChangeEvent, useState } from 'react';
-import { NoteCard } from './components/note-card';
+import { NoteCard } from './components/Note-card';
 import { NewNoteCard } from './components/new-note-card';
 import { toast } from 'sonner';
 

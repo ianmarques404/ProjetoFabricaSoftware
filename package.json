@@ -1,5 +1,5 @@
 {
-  "name": "nlw-expert-notes",
+  "name": "Minhas Tarefas",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -7,7 +7,7 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "test": "vitest"
+    "test": "jest"
   },
   "dependencies": {
     "@radix-ui/react-dialog": "^1.0.5",
@@ -25,6 +25,7 @@
     "@types/react-dom": "^18.3.7",
     "@vitejs/plugin-react": "^4.2.1",
     "autoprefixer": "^10.4.17",
+    "jest": "^29.7.0",
     "postcss": "^8.4.34",
     "tailwindcss": "^3.4.1",
     "typescript": "^5.2.2",
