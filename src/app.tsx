@@ -13,7 +13,8 @@ interface Note {
 
 export function App() {
   //Estado para as buscas
-  const [search, setSearch] = useState('')
+  const [search, setSearch] = useState('');
+  const [filterStatus, setFilterStatus] = useState<'Todas' | 'Pendente' | 'Em andamento' | 'Concluido'>('Todas'); // Estado do filtro
   //Estado das notas
   const [notes, setNotes] = useState<Note[]>(() => {
     const notesOnStorage = localStorage.getItem('notes')
@@ -63,12 +64,19 @@ export function App() {
     setSearch(query)
   }
 
+  /*
   const filteredNotes = search !== ''
     ? notes.filter(notes =>
       notes.title.toLowerCase().includes(search.toLowerCase()) ||
       notes.content.toLowerCase().includes(search.toLowerCase())
     )
     : notes;
+    */
+
+  const filteredNotes = notes.filter(notes =>
+    (filterStatus === 'Todas' || notes.status === filterStatus) && // Filtra pelo estado da tarefa
+    (search === '' || notes.title.toLowerCase().includes(search.toLowerCase()) || notes.content.toLowerCase().includes(search.toLowerCase()))
+  );
 
   return (
     <div className='mx-auto max-w-6xl my-12 space-y-6 px-5' >
@@ -82,6 +90,17 @@ export function App() {
       </form>
 
       <div className='h-px bg-slate-700' />
+      {/** Filtro de seleção */}
+      <select
+        value={filterStatus}
+        onChange={(e) => setFilterStatus(e.target.value as 'Todas' | 'Pendente' | 'Em andamento' | 'Concluido')}
+        className="bg-transparent text-sm outline-none"
+      >
+        <option value="Todas">Todas as tarefas</option>
+        <option value="Pendente">Pendentes ❌</option>
+        <option value="Em andamento">Em andamento ⏳</option>
+        <option value="Concluída">Concluídas ✅</option>
+      </select>
 
       <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 auto-rows-[250px] gap-6' >
         <NewNoteCard onNoteCreated={onNoteCreated} />
