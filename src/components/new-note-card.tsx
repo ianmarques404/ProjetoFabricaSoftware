@@ -4,7 +4,7 @@ import { ChangeEvent, FormEvent, useEffect, useState } from 'react'
 import { toast } from 'sonner'
 
 interface NewNoteCardProps {
-  onNoteCreated: (title: string, content: string) => void
+  onNoteCreated: (title: string, content: string, status: 'Pendente' | 'Em andamento' | 'Concluido') => void
 }
 
 let speechRecognition: SpeechRecognition | null = null
@@ -14,12 +14,13 @@ export function NewNoteCard({ onNoteCreated }: NewNoteCardProps) {
   const [isRecording, setIsRecording] = useState(false)
   const [content, setContent] = useState('')
   const [title, setTitle] = useState('')
+  const [status, setStatus] = useState<'Pendente' | 'Em andamento' | 'Concluido'>('Pendente')
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.ctrlKey && e.key === 'Enter') {
         e.preventDefault()
-        const fakeFormEvent = { preventDefault: () => {} } as FormEvent
+        const fakeFormEvent = { preventDefault: () => { } } as FormEvent
         handleSaveNote(fakeFormEvent)
       }
     }
@@ -55,10 +56,11 @@ export function NewNoteCard({ onNoteCreated }: NewNoteCardProps) {
       return
     }
 
-    onNoteCreated(title, content)
+    onNoteCreated(title, content, status)
 
     setTitle('')
     setContent('')
+    setStatus('Pendente')
     setShouldShowOnBoarding(true)
 
     toast.success('Tarefa criada com sucesso!')
@@ -165,6 +167,18 @@ export function NewNoteCard({ onNoteCreated }: NewNoteCardProps) {
               )}
             </div>
 
+            <select
+              value={status}
+              onChange={(e) => setStatus(e.target.value as 'Pendente' | 'Em andamento' | 'Concluido')}
+              className='bg-transparent text-sm outline-none'
+            >
+              <option value={'Pendente'}>Pendente ❌</option>
+              <option value="Em andamento">Em andamento ⏳</option>
+              <option value="Concluída">Concluída ✅</option>
+
+            </select>
+
+            {/** validação para saber se está gravando audio e digitar texto */}
             {isRecording ? (
               <button
                 type='button'
