@@ -37,10 +37,10 @@ export function NoteCard({ note, onNoteDeleted }: NoteCardProps) {
                     <div className='flex flex-1 flex-col gap-6 p-5 '>
                         <p className='text-lg leading-6 text-slate-200'> {note.title} </p>
                         <span className='text-sm font-medium text-slate-300 first-letter:uppercase'> {formatDistanceToNow(note.date, { locale: ptBR, addSuffix: true })} </span>
-                        <p className='text-sm leading-6 text-slate-400'> {note.content} </p>
                         <span className={`px-2 py-1 rounded-md text-xs font-bold ${note.status === 'Pendente' ? 'bg-red-500' : note.status === 'Em andamento' ? 'bg-yellow-500' : 'bg-green-500'}`}>
                             {note.status}
                         </span>
+                        <p className='text-sm leading-6 text-slate-400'> {note.content} </p>
                     </div>
 
                     <button

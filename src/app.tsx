@@ -94,12 +94,12 @@ export function App() {
       <select
         value={filterStatus}
         onChange={(e) => setFilterStatus(e.target.value as 'Todas' | 'Pendente' | 'Em andamento' | 'Concluido')}
-        className="bg-transparent text-sm outline-none"
+        className="bg-slate-800 text-white text-sm outline-none border border-slate-600 rounded-md px-3 py-2 hover:border-slate-300 focus:border-slate-500"
       >
-        <option value="Todas">Todas as tarefas</option>
-        <option value="Pendente">Pendentes ❌</option>
-        <option value="Em andamento">Em andamento ⏳</option>
-        <option value="Concluída">Concluídas ✅</option>
+        <option className='bg-slate-700 text-white py-2' value="Todas">Todas as tarefas</option>
+        <option className='bg-slate-700 text-white py-2' value="Pendente">Pendentes ❌</option>
+        <option className='bg-slate-700 text-white py-2' value="Em andamento">Em andamento ⏳</option>
+        <option className='bg-slate-700 text-white py-2' value="Concluido">Concluídas ✅</option>
       </select>
 
       <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 auto-rows-[250px] gap-6' >

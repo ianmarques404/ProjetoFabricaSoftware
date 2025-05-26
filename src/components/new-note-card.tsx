@@ -118,7 +118,7 @@ export function NewNoteCard({ onNoteCreated }: NewNoteCardProps) {
     <Dialog.Root>
       <Dialog.Trigger className='flex flex-col rounded-md bg-slate-700 p-5 gap-3 text-left outline-none hover:ring-2 hover:ring-slate-600 focus-visible:ring-2 focus-visible:ring-lime-400'>
         <span className='text-lg font-medium text-slate-200'>
-          Criar nova terfa 👆
+          Criar nova tarefa 👆
         </span>
         <p className='text-sm leading-6 text-slate-400'>
           Crie suas atividades com praticidade utilizando áudio ou escrevendo manualmente.
@@ -153,6 +153,16 @@ export function NewNoteCard({ onNoteCreated }: NewNoteCardProps) {
                 value={title}
               />
 
+              <select
+                value={status}
+                onChange={(e) => setStatus(e.target.value as 'Pendente' | 'Em andamento' | 'Concluido')}
+                className="bg-slate-600 text-white text-sm outline-none border border-slate-600 rounded-md px-3 py-2 hover:border-lime-400 focus:border-lime-500"
+              >
+                <option className="text-white py-2" value={'Pendente'}>Pendentes ❌</option>
+                <option className="text-white py-2" value={'Em andamento'}>Em andamento ⏳</option>
+                <option className="text-white py-2" value={'Concluido'}>Conclupído ✅</option>
+              </select>
+
               {shouldShowOnBoarding ? (
                 <p className='text-sm leading-6 text-slate-400'>
                   Comece <button type='button' onClick={handleStartRecording} className='font-me text-lime-400 hover:underline'> gravando um texto com sua voz </button> ou se preferir, também pode <button type='button' onClick={handleStartEditor} className='font-me text-lime-400 hover:underline'>digitar manualmente</button>.
@@ -166,17 +176,6 @@ export function NewNoteCard({ onNoteCreated }: NewNoteCardProps) {
                 />
               )}
             </div>
-
-            <select
-              value={status}
-              onChange={(e) => setStatus(e.target.value as 'Pendente' | 'Em andamento' | 'Concluido')}
-              className='bg-transparent text-sm outline-none'
-            >
-              <option value={'Pendente'}>Pendente ❌</option>
-              <option value="Em andamento">Em andamento ⏳</option>
-              <option value="Concluída">Concluída ✅</option>
-
-            </select>
 
             {/** validação para saber se está gravando audio e digitar texto */}
             {isRecording ? (
