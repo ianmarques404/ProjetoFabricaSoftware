@@ -25,7 +25,7 @@ export function App() {
   })
 
   function onNoteCreated(title: string, content: string, status: 'Pendente' | 'Em andamento' | 'Concluido') {
-    if (title.trim() === '' || content.trim() === ''){
+    if (title.trim() === '' || content.trim() === '') {
       toast.error('Título e conteúdo são obrigatórios');
       return
     }
@@ -35,7 +35,7 @@ export function App() {
       title,
       date: new Date(),
       content,
-      status, 
+      status,
     }
 
     const notesArray = [newNote, ...notes]
@@ -54,18 +54,21 @@ export function App() {
     setNotes(notesArray)
 
     localStorage.setItem('notes', JSON.stringify(notesArray))
-    
+
   }
 
-  function handleSearch (event: ChangeEvent<HTMLInputElement>) {
+  function handleSearch(event: ChangeEvent<HTMLInputElement>) {
     const query = event.target.value
 
     setSearch(query)
   }
 
-  const filteredNotes = search != ''
-  ? notes.filter(note => note.content.toLowerCase().includes(search.toLowerCase()))
-  : notes
+  const filteredNotes = search !== ''
+    ? notes.filter(notes =>
+      notes.title.toLowerCase().includes(search.toLowerCase()) ||
+      notes.content.toLowerCase().includes(search.toLowerCase())
+    )
+    : notes;
 
   return (
     <div className='mx-auto max-w-6xl my-12 space-y-6 px-5' >
