@@ -1,5 +1,5 @@
 import { ChangeEvent, useState } from 'react';
-import { NoteCard } from './components/Note-card';
+import { NoteCard } from './components/note-card';
 import { NewNoteCard } from './components/new-note-card';
 import { toast } from 'sonner';
 
@@ -8,6 +8,7 @@ interface Note {
   title: string,
   date: Date,
   content: string
+  status: 'Pendente' | 'Em andamento' | 'Concluido';
 }
 
 export function App() {
@@ -23,7 +24,7 @@ export function App() {
     return []
   })
 
-  function onNoteCreated(title: string, content: string) {
+  function onNoteCreated(title: string, content: string, status: 'Pendente' | 'Em andamento' | 'Concluido') {
     if (title.trim() === '' || content.trim() === ''){
       toast.error('Título e conteúdo são obrigatórios');
       return
@@ -34,6 +35,7 @@ export function App() {
       title,
       date: new Date(),
       content,
+      status, 
     }
 
     const notesArray = [newNote, ...notes]
