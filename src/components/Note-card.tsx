@@ -40,10 +40,10 @@ export function NoteCard({ note, onNoteDeleted, onNoteUpdated }: NoteCardProps) 
                     {formatDistanceToNow(note.date, { locale: ptBR, addSuffix: true })}
                 </span>
                 <span
-                    className={`px-2 py-1 rounded-md text-xs font-bold ${note.status === 'Pendente' ? 'bg-red-500' :
-                        note.status === 'Em andamento' ? 'bg-yellow-500' :
+                    className={`px-2 py-1 rounded-md text-xs font-bold ${note.status === 'PENDENTE' ? 'bg-red-500' :
+                        note.status === 'EM_ANDAMENTO' ? 'bg-yellow-500' :
                             'bg-green-500'
-                        }`}
+                        }`} // Informações estão salvas assim dentro do banco de dados, arrumar posteriormente
                 >
                     {note.status}
                 </span>
