@@ -160,7 +160,7 @@ export function NewNoteCard({ onNoteCreated }: NewNoteCardProps) {
               >
                 <option className="text-white py-2" value={'Pendente'}>Pendentes ❌</option>
                 <option className="text-white py-2" value={'Em andamento'}>Em andamento ⏳</option>
-                <option className="text-white py-2" value={'Concluido'}>Conclupído ✅</option>
+                <option className="text-white py-2" value={'Concluido'}>Concluído ✅</option>
               </select>
 
               {shouldShowOnBoarding ? (
