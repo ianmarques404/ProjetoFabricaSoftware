@@ -10,10 +10,10 @@ interface NoteCardProps {
         title: string;
         date: string;
         content: string;
-        status: 'Pendente' | 'Em andamento' | 'Concluido';
+        status: 'PENDENTE' | 'EM_ANDAMENTO' | 'CONCLUIDO';
     };
     onNoteDeleted: (id: string) => void;
-    onNoteUpdated: (id: string, title: string, content: string, status: 'Pendente' | 'Em andamento' | 'Concluido') => void;
+    onNoteUpdated: (id: string, title: string, content: string, status: 'PENDENTE' | 'EM_ANDAMENTO' | 'CONCLUIDO') => void;
 }
 
 export function NoteCard({ note, onNoteDeleted, onNoteUpdated }: NoteCardProps) {
@@ -73,17 +73,17 @@ export function NoteCard({ note, onNoteDeleted, onNoteUpdated }: NoteCardProps) 
                                 />
                                 <select
                                     value={editedStatus}
-                                    onChange={(e) => setEditedStatus(e.target.value as 'Pendente' | 'Em andamento' | 'Concluido')}
+                                    onChange={(e) => setEditedStatus(e.target.value as 'PENDENTE' | 'EM_ANDAMENTO' | 'CONCLUIDO')}
                                     className="bg-slate-800 text-white px-3 py-2 rounded-md"
                                 >
-                                    <option value="Pendente">Pendente ❌</option>
-                                    <option value="Em andamento">Em andamento ⏳</option>
-                                    <option value="Concluido">Concluido ✅</option>
+                                    <option value="PENDENTE">Pendente ❌</option>
+                                    <option value="EM_ANDAMENTO">Em andamento ⏳</option>
+                                    <option value="CONCLUIDO">Concluído ✅</option>
                                 </select>
                                 <button
                                     className="bg-green-500 text-white py-2 px-4 rounded-md hover:bg-green-600"
                                     onClick={() => {
-                                        onNoteUpdated(note.id, editedTitle, editedContent, editedStatus as 'Pendente' | 'Em andamento' | 'Concluido');
+                                        onNoteUpdated(note.id, editedTitle, editedContent, editedStatus as 'PENDENTE' | 'EM_ANDAMENTO' | 'CONCLUIDO');
                                         setIsEditing(false);
                                     }}
                                 >
@@ -97,8 +97,8 @@ export function NoteCard({ note, onNoteDeleted, onNoteUpdated }: NoteCardProps) 
                                     {formatDistanceToNow(note.date, { locale: ptBR, addSuffix: true })}
                                 </span>
                                 <span
-                                    className={`px-2 py-1 rounded-md text-xs font-bold ${note.status === 'Pendente' ? 'bg-red-500' :
-                                        note.status === 'Em andamento' ? 'bg-yellow-500' :
+                                    className={`px-2 py-1 rounded-md text-xs font-bold ${note.status === 'PENDENTE' ? 'bg-red-500' :
+                                        note.status === 'EM_ANDAMENTO' ? 'bg-yellow-500' :
                                             'bg-green-500'
                                         }`}
                                 >
