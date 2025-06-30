@@ -8,7 +8,7 @@ interface NoteCardProps {
     note: {
         id: string;
         title: string;
-        date: Date;
+        date: string;
         content: string;
         status: 'Pendente' | 'Em andamento' | 'Concluido';
     };
