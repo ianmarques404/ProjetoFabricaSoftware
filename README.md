@@ -1,4 +1,3 @@
-
 # Projeto - Minhas Tarefas
 
 Projeto desenvolvido como parte da disciplina de **Fábrica de Software**, 7º semestre do curso de Engenharia de Software.
@@ -7,25 +6,27 @@ Projeto desenvolvido como parte da disciplina de **Fábrica de Software**, 7º s
 
 Este é um projeto simples de gerenciamento de tarefas, desenvolvido com as seguintes tecnologias:
 
-- **React** (com TypeScript)
-- **Tailwind CSS**
-- **Vite** (ambiente de build e desenvolvimento)
+* **React** (com TypeScript)
+* **Tailwind CSS**
+* **Vite** (ambiente de build e desenvolvimento)
+* **Spring Boot** (Java + Maven)
+* **MySQL** (persistência de dados)
 
 ## Funcionalidades atuais
 
-- Criação, edição, exclusão e filtragem de tarefas.
-- Reconhecimento de voz para facilitar a criação de tarefas (via Web Speech API).
-- Persistência dos dados via `localStorage`.
+* Criação, edição, exclusão e filtragem de tarefas.
+* Reconhecimento de voz para facilitar a criação de tarefas (via Web Speech API).
+* Persistência dos dados em banco de dados **MySQL**, com **Java + Spring Boot** no back-end.
 
 ## Testes
 
-- Implementação inicial de testes utilizando o **Jest**.
-- Até o momento, os testes são **manuais**, mas já foram configurados e testados com sucesso.
-- O arquivo `App.test.tsx` é o único teste automatizado presente no momento.
+* Implementação inicial de testes utilizando o **Jest**.
+* Até o momento, os testes são **manuais**, mas já foram configurados e testados com sucesso.
+* O arquivo `App.test.tsx` é o único teste automatizado presente no momento.
 
 ### Comandos úteis
 
-- Para rodar a aplicação localmente:
+* Para rodar a aplicação front-end localmente:
 
   ```bash
   npm run dev
@@ -33,11 +34,19 @@ Este é um projeto simples de gerenciamento de tarefas, desenvolvido com as segu
 
   A aplicação será aberta no navegador no endereço `http://localhost:5173`.
 
-- Para rodar os testes com o Jest:
+* Para rodar os testes com o Jest:
 
   ```bash
   npm run test
   ```
+
+* Para iniciar o back-end com Spring Boot:
+
+  ```bash
+  ./mvnw spring-boot:run
+  ```
+
+  O back-end será executado no endereço `http://localhost:8080`.
 
 ## Integração Contínua (CI)
 
@@ -49,15 +58,9 @@ Os workflows foram testados e estão funcionando corretamente — tanto em cená
 
 Estão anexadas neste repositório imagens que mostram:
 
-- Execução dos testes com sucesso e falha via Jest.
-- ![c537a998-578c-41fa-9c5c-2bdac3dd4a38](https://github.com/user-attachments/assets/08600a25-d5c1-4a64-bf09-69c4bb51a18c)
-- ![image](https://github.com/user-attachments/assets/1b8a53d2-872c-4944-9336-aee05fadba01)
-
-
-- Funcionamento da integração contínua com GitHub Actions.
-- ![c536dd0c-d70e-49f8-a2ce-aad238900546](https://github.com/user-attachments/assets/e4379237-33ca-48b1-a1a4-0b72d5b84296)
-- ![image](https://github.com/user-attachments/assets/314135ed-3370-4870-a039-1331aa6707cc)
-
----
+* Execução dos testes com sucesso e falha via Jest.
+* Funcionamento da integração contínua com GitHub Actions.
 
 > ⚠️ *Este projeto está em desenvolvimento. Novas funcionalidades e melhorias serão adicionadas ao longo do tempo.*
+
+---
