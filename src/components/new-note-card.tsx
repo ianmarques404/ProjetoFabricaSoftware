@@ -4,7 +4,7 @@ import { ChangeEvent, FormEvent, useEffect, useState } from 'react'
 import { toast } from 'sonner'
 
 interface NewNoteCardProps {
-  onNoteCreated: (title: string, content: string, status: 'Pendente' | 'Em andamento' | 'Concluido') => void
+  onNoteCreated: (title: string, content: string, status: 'PENDENTE' | 'EM_ANDAMENTO' | 'CONCLUIDO') => void
 }
 
 let speechRecognition: SpeechRecognition | null = null
@@ -14,7 +14,7 @@ export function NewNoteCard({ onNoteCreated }: NewNoteCardProps) {
   const [isRecording, setIsRecording] = useState(false)
   const [content, setContent] = useState('')
   const [title, setTitle] = useState('')
-  const [status, setStatus] = useState<'Pendente' | 'Em andamento' | 'Concluido'>('Pendente')
+  const [status, setStatus] = useState<'PENDENTE' | 'EM_ANDAMENTO' | 'CONCLUIDO'>('PENDENTE')
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -60,7 +60,7 @@ export function NewNoteCard({ onNoteCreated }: NewNoteCardProps) {
 
     setTitle('')
     setContent('')
-    setStatus('Pendente')
+    setStatus('PENDENTE')
     setShouldShowOnBoarding(true)
 
     toast.success('Tarefa criada com sucesso!')
@@ -155,12 +155,12 @@ export function NewNoteCard({ onNoteCreated }: NewNoteCardProps) {
 
               <select
                 value={status}
-                onChange={(e) => setStatus(e.target.value as 'Pendente' | 'Em andamento' | 'Concluido')}
+                onChange={(e) => setStatus(e.target.value as 'PENDENTE' | 'EM_ANDAMENTO' | 'CONCLUIDO')}
                 className="bg-slate-600 text-white text-sm outline-none border border-slate-600 rounded-md px-3 py-2 hover:border-lime-400 focus:border-lime-500"
               >
-                <option className="text-white py-2" value={'Pendente'}>Pendentes ❌</option>
-                <option className="text-white py-2" value={'Em andamento'}>Em andamento ⏳</option>
-                <option className="text-white py-2" value={'Concluido'}>Concluído ✅</option>
+                <option className="text-white py-2" value={'PENDENTE'}>Pendente ❌</option>
+                <option className="text-white py-2" value={'EM_ANDAMENTO'}>Em andamento ⏳</option>
+                <option className="text-white py-2" value={'CONCLUIDO'}>Concluído ✅</option>
               </select>
 
               {shouldShowOnBoarding ? (
