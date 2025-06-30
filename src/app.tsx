@@ -9,18 +9,18 @@ interface Note {
   title: string;
   date: string; // A data virá como string do backend (ISO 8601)
   content: string;
-  status: 'Pendente' | 'Em andamento' | 'Concluido';
+  status: 'PENDENTE' | 'EM_ANDAMENTO' | 'CONCLUIDO';
 }
 
 export function App() {
   const [search, setSearch] = useState('');
-  const [filterStatus, setFilterStatus] = useState<'Todas' | 'Pendente' | 'Em andamento' | 'Concluido'>('Todas');
+  const [filterStatus, setFilterStatus] = useState<'TODAS' | 'PENDENTE' | 'EM_ANDAMENTO' | 'CONCLUIDO'>('TODAS');
   const [notes, setNotes] = useState<Note[]>([]); // Inicie vazio, os dados virão do backend
 
   // **URL base da sua API Spring Boot**
   const API_BASE_URL = 'http://localhost:8080/api/notes';
 
-  // --- Função para buscar todas as notas do backend ---
+  // --- Função para buscar TODAS as notas do backend ---
   useEffect(() => {
     fetchNotes();
   }, []); // O array vazio [] garante que esta função seja executada apenas uma vez após a montagem inicial
@@ -40,7 +40,7 @@ export function App() {
   }
 
   // --- Função para criar uma nova nota ---
-  async function onNoteCreated(title: string, content: string, status: 'Pendente' | 'Em andamento' | 'Concluido') {
+  async function onNoteCreated(title: string, content: string, status: 'PENDENTE' | 'EM_ANDAMENTO' | 'CONCLUIDO') {
     if (title.trim() === '' || content.trim() === '') {
       toast.error('Título e conteúdo são obrigatórios!');
       return;
@@ -92,7 +92,7 @@ export function App() {
   }
 
   // --- Função para atualizar uma nota ---
-  async function onNoteUpdated(id: string, updatedTitle: string, updatedContent: string, updatedStatus: 'Pendente' | 'Em andamento' | 'Concluido') {
+  async function onNoteUpdated(id: string, updatedTitle: string, updatedContent: string, updatedStatus: 'PENDENTE' | 'EM_ANDAMENTO' | 'CONCLUIDO') {
     try {
       const response = await fetch(`${API_BASE_URL}/${id}`, {
         method: 'PUT',
@@ -128,7 +128,7 @@ export function App() {
 
   // Filtragem por título, conteúdo e status (ajuste para status em maiúsculas)
   const filteredNotes = notes.filter(note =>
-    (filterStatus === 'Todas' || note.status.toUpperCase() === filterStatus.toUpperCase()) &&
+    (filterStatus === 'TODAS' || note.status.toUpperCase() === filterStatus.toUpperCase()) &&
     (search === '' || note.title.toLowerCase().includes(search.toLowerCase()) || note.content.toLowerCase().includes(search.toLowerCase()))
   );
 
@@ -150,13 +150,13 @@ export function App() {
       {/* Filtro de seleção */}
       <select
         value={filterStatus}
-        onChange={(e) => setFilterStatus(e.target.value as 'Todas' | 'Pendente' | 'Em andamento' | 'Concluido')}
+        onChange={(e) => setFilterStatus(e.target.value as 'TODAS' | 'PENDENTE' | 'EM_ANDAMENTO' | 'CONCLUIDO')}
         className="bg-slate-800 text-white text-sm outline-none border border-slate-600 rounded-md px-3 py-2 hover:border-slate-300 focus:border-slate-500"
       >
-        <option className="bg-slate-700 text-white py-2" value="Todas">Todas as tarefas</option>
-        <option className="bg-slate-700 text-white py-2" value="Pendente">Pendentes ❌</option>
-        <option className="bg-slate-700 text-white py-2" value="Em andamento">Em andamento ⏳</option>
-        <option className="bg-slate-700 text-white py-2" value="Concluido">Concluídas ✅</option>
+        <option className="bg-slate-700 text-white py-2" value="TODAS">Todas as tarefas</option>
+        <option className="bg-slate-700 text-white py-2" value="PENDENTE">Pendentes ❌</option>
+        <option className="bg-slate-700 text-white py-2" value="EM_ANDAMENTO">Em andamento ⏳</option>
+        <option className="bg-slate-700 text-white py-2" value="CONCLUIDO">Concluídas ✅</option>
       </select>
 
       {/* Lista de tarefas */}
